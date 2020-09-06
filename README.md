@@ -18,7 +18,7 @@ Handling output:
 		  Alert the user when storage space is very less
 	- Output file encoding format
 
-Input data:
+Handling Input:
 	- Handle UNICODE characters (Arbitrary characters)
 	- Handle control characters (\t \n \r \r\n \\ \' )
 	- Handle interrupts (ctrl+Z, ctrl+C, etc.) and signals (SIGSEGV, SIGABRT, etc.) before exiting from the program.
@@ -26,17 +26,13 @@ Input data:
 	- Optimize read/write for large inputs
 	- Reading data from stdin
 			character-by-character vs line-by-line vs chunk-by-chunk
-      
+
+Error handling:
+	- Handle all possible errors
 
 cross platform support (portable code):
 	- OS(Windows, Linux, Solaris, etc.)
 	- Processor & Endianess dependency (Support both Big & Little Endlian processor while reading/writing data) 
-
-Error handling:
-	- Handle all possible errors
-		
-Modularize the code as much as possible
-Follow conventions and proper naming for variables and functions.
 
 Other pending Items:
 Handle Input File and output File extension mismatch
