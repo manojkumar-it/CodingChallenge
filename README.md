@@ -13,7 +13,7 @@ Handling output:
 		  Check if the filename contains only supported characters (OS specific)
 		  Check if the path to the output file exists. If path does not exist, prompt the user to provide a valid path.
 		  If output file with the same name exists, prompt the user to provide a different name.
-      If the extension of output file name provided by user doesn't match with the input parameter 'pFileExtension', a warning is displayed to the user.
+		  If the extension of output file name provided by user doesn't match with the input parameter 'pFileExtension', a warning is displayed to the user.
 	- Check for insufficient storage space while writing to file
 		  Alert the user when storage space is very less
 	- Output file encoding format
