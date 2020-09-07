@@ -48,6 +48,12 @@ enum Encoding
 // This function should be used only for getting the encoding of text files.
 int getTextFileEncoding(const char *pFileName)
 {
+	if(!pFileName)
+	{
+		printf("NULL pointer passed as paramter for file name\n");
+		exit(1);
+	}
+	
 	FILE *pFile = fopen(pFileName, "rb");
 	if(!pFile)
 	{
@@ -60,37 +66,46 @@ int getTextFileEncoding(const char *pFileName)
 	
 	if (size = fread(bom,sizeof(bom[0]),4,pFile))
 	{
+		FCLOSE(pFile);
+		
 		// Analyze the BOM
 		if (bom[0] == 0x2b && bom[1] == 0x2f && bom[2] == 0x76) 
 		{
-			printf("Encoding.UTF-7\n");
+			printf("The encoding format of '%s' file is UTF-7\n", pFileName);
 			return UTF_7;
 		}
 		if (bom[0] == 0xef && bom[1] == 0xbb && bom[2] == 0xbf)
 		{
-			printf("Encoding.UTF-8\n");
+			printf("The encoding format of '%s' file is UTF-8\n", pFileName);
 			return UTF_8;
 		}
 		if (bom[0] == 0xff && bom[1] == 0xfe && bom[2] == 0 && bom[3] == 0)
 		{
-			printf("Encoding.UTF-32LE\n");
+			printf("The encoding format of '%s' file is  UTF-32LE\n", pFileName);
 			return UTF_32LE;
 		}			
 		if (bom[0] == 0xff && bom[1] == 0xfe)
 		{
-			printf("Encoding.UTF-16LE\n");
+			printf("The encoding format of '%s' file is UTF-16LE\n", pFileName);
 			return UTF_16LE;
 		}			
 		if (bom[0] == 0xfe && bom[1] == 0xff)
 		{
-			printf("Encoding.UTF-16BE\n");
+			printf("The encoding format of '%s' file is UTF-16BE\n", pFileName);
 			return UTF_16BE;
 		}			
 		if (bom[0] == 0 && bom[1] == 0 && bom[2] == 0xfe && bom[3] == 0xff)
 		{
-			printf("Encoding.UTF_32LE\n");
+			printf("The encoding format of '%s' file is UTF_32LE\n", pFileName);
 			return UTF_32LE; 
 		}
+	}
+	
+	if(ferror(pFile))
+	{
+		printf("Read Failed\n");
+		FCLOSE(pFile);
+		exit(1);
 	}
 	
 	// We actually have no idea what the encoding is if we reach this point, so
@@ -427,6 +442,11 @@ void writeData(FILE *pInputStream, FILE *pOutputStream, bool encodingConversionR
 					size = fwrite(output, sizeof(output[0]), strlen16(output), pOutputStream);
 					break;
 				}
+				case UTF_8:
+				{
+					fwrite(buffer, sizeof(buffer[0]),size, pOutputStream);
+					break;
+				}
 				default:
 				{
 					printf("Error: Output file has a encoding format which is currently not supported !\n");
@@ -562,7 +582,7 @@ int main()
 						exit(EXIT_FAILURE);
 					}
 				}
-				pOutputStream = fopen(pOutputFileName,"ab");
+				pOutputStream = fopen(pOutputFileName,"ab");		
 				encodingConversionRequired = true;
 			}
 			else
