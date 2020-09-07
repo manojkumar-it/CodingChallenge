@@ -5,10 +5,10 @@ Write a program in C (not C++) that reads arbitrary data from standard input and
 By arbitrary data, we mean that we don’t want to put any limitations or restrictions whatsoever on the data a user provides via standard input. 
 
 ### TEST CASES
-| TEST CASE CATEGORY | TEST CASE DESCRIPTION | STATUS |
-| ------------------ | --------------------- | ------ |
-| | Provide a choice to the user for reading input data from 1. Console (Standard input) 2. Existing input File | Done
-| | Provide support for reading data from standard input | Done
+|TEST CASE CATEGORY | TEST CASE DESCRIPTION | STATUS |
+|------------------ | --------------------- | ------ |
+|| Provide a choice to the user for reading input data from 1. Console (Standard input) 2. Existing input File | Done
+|| Provide support for reading data from standard input | Done
 ||Provide support for reading data from an existing input file | Done
 ||Check whether the input file provided by user exists.| Done 
 ||If the input file does not exists, prompt the user to provide a valid file name. Repeat prompting for input file name, until a valid input file is provided. | Done
@@ -35,3 +35,12 @@ By arbitrary data, we mean that we don’t want to put any limitations or restri
 ||Processor & Endianness dependency (Support Big Endian processor while reading/writing data) | Open
 ||Support for storing output files in user specified location (Currently, the output file is stored in the same path where the executable file is run)	| Open
 ||Display appropriate/specific error message to the user when access to output file is denied because of read only permissions. Currently, a generic message "output file stream pointer is NULL." for any failure during fopen() call. | Open
+||Segregating source code in to multiple headers and implementation files | open
+
+### Reference Links
+https://en.cppreference.com/w/
+https://docs.microsoft.com/en-us/cpp
+https://unicodebook.readthedocs.io/good_practices.html
+https://developer.ibm.com/technologies/systems/articles/au-endianc/
+https://c-for-dummies.com/blog/?p=2605
+https://stackoverflow.com/
