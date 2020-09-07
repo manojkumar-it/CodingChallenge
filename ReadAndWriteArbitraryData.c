@@ -440,8 +440,7 @@ void writeData(FILE *pInputStream, FILE *pOutputStream, bool encodingConversionR
 		{
 			fwrite(buffer, sizeof(buffer[0]),size, pOutputStream);
 		}
-		printf("Write size: '%d'\n",size);
-		//HandleError
+		
 		if(ferror(pOutputStream))
 		{
 			printf("Write Failed\n");
@@ -453,7 +452,6 @@ void writeData(FILE *pInputStream, FILE *pOutputStream, bool encodingConversionR
 		}
 	}
 	
-	//HandleError
 	if(ferror(pInputStream))
 	{
 		printf("Read Failed\n");
@@ -565,6 +563,7 @@ int main()
 					}
 				}
 				pOutputStream = fopen(pOutputFileName,"ab");
+				encodingConversionRequired = true;
 			}
 			else
 			{
@@ -573,7 +572,10 @@ int main()
 				printf("Exiting...\n",c);
 				exit(EXIT_SUCCESS);	
 			}
-			encodingConversionRequired = true;
+		}
+		else
+		{
+			pOutputStream = fopen(pOutputFileName,"wb");
 		}
 		printf("Enter the input data (press ctrl+z twice & press 'Enter' to process input): \n");
 	}
