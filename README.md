@@ -34,12 +34,23 @@ By arbitrary data, we mean that we don’t want to put any limitations or restri
 ||Processor & Endianness dependency (Support Big Endian processor while reading/writing data) | Open
 ||Support for storing output files in user specified location (Currently, the output file is stored in the same path where the executable file is run)	| Open
 ||Display appropriate/specific error message to the user when access to output file is denied because of read only permissions. Currently, a generic message "output file stream pointer is NULL." for any failure during fopen() call. | Open
-||Segregating source code in to multiple headers and implementation files | open
+||Segregating source code in to multiple headers and implementation files | Open
 
 ### Reference Links
-https://en.cppreference.com/w/
-https://docs.microsoft.com/en-us/cpp
-https://unicodebook.readthedocs.io/good_practices.html
-https://developer.ibm.com/technologies/systems/articles/au-endianc/
-https://c-for-dummies.com/blog/?p=2605
-https://stackoverflow.com/
+[https://en.cppreference.com/w/]
+[https://docs.microsoft.com/en-us/cpp]
+[https://unicodebook.readthedocs.io/good_practices.html]
+[https://developer.ibm.com/technologies/systems/articles/au-endianc/]
+[https://c-for-dummies.com/blog/?p=2605]
+[https://stackoverflow.com/]
+
+### About NortonLifeLock Labs 
+The NortonLifeLock Labs team is made up of leading threat and security researchers supported by advanced systems to innovate security technology and threat intelligence to protect our customers against known and new threats. The main locations of the team are Chennai, India – Oslo, Norway – Dublin, Ireland and Culver City, USA. The Labs team is part of the CTO office. 
+ 
+The members in this team overlook the portfolio of security technologies that makes for high detection without sacrificing system performance. The portfolio consists of modern and traditional components, like: 
+*	Network detection 
+*	Reputation and prevalence 
+*	Machine Learning 
+*	Cloud and Crowd detections 
+*	Behavioural analysis 
+*	Anti-virus engines and static scanners 
