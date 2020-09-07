@@ -1,5 +1,4 @@
-# CodingChallenge
-NortonLifeLock Labs Team Coding Challenge:
+# CodingChallenge (NortonLifeLock Labs Team)
 
 Write a program in C (not C++) that reads arbitrary data from standard input and writes it to a file. 
 By arbitrary data, we mean that we don’t want to put any limitations or restrictions whatsoever on the data a user provides via standard input. 
