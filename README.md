@@ -35,6 +35,7 @@ By arbitrary data, we mean that we don’t want to put any limitations or restri
 ||Support for storing output files in user specified location (Currently, the output file is stored in the same path where the executable file is run)	| Open
 ||Display appropriate/specific error message to the user when access to output file is denied because of read only permissions. Currently, a generic message "output file stream pointer is NULL." for any failure during fopen() call. | Open
 ||Segregating source code in to multiple headers and implementation files | Open
+||Thread safe code in case of a multi-threaded application. Ex: Two threads trying to write to the same output file. | Open
 
 ### Reference Links
 [https://en.cppreference.com/w/]
