@@ -39,10 +39,12 @@ By arbitrary data, we mean that we don’t want to put any limitations or restri
 
 ### Test Execution Details
 
+| Environment & other parameters |  Description | Status|
+| --- | ----------------------------- | -------- |
 | OS | Windows 10 x64, Linux (Ubuntu)| verified |
 | Compiler | cl for Windows, gcc for Linux | verified |
 | Locales | English, Japanese | verified
-| Input File types | (.txt, .c, .html, .log, .jpg, .mp4, etc.) | verified |
+| Input file types | (.txt, .c, .html, .log, .jpg, .mp4, etc.) | verified |
 
 ### Reference Links
 [https://en.cppreference.com/w/]
