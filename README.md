@@ -64,3 +64,6 @@ The members in this team overlook the portfolio of security technologies that ma
 *	Cloud and Crowd detections 
 *	Behavioural analysis 
 *	Anti-virus engines and static scanners 
+
+[![BotSight.svg](https://download.botsight.nlok-research.me/img/icons/Bot_icon180.svg)](https://download.botsight.nlok-research.me/) 
+[NortonLifelock Labs Team](https://www.nortonlifelock.com/us/en/research-labs/)
