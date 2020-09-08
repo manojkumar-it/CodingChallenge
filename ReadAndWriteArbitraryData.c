@@ -279,9 +279,10 @@ void utf8_to_utf16(unsigned char* const utf8_str, int utf8_str_size, char16_t* u
 // For handling signals
 void signalHandler(int signum)
 {
+   //Implementation pending for catching and handling signals
    printf("Caught signal %d\n",signum);
+   
    // Cleanup and close up stuff here
-
    // Terminate program
    //exit(signum);
 }
@@ -492,7 +493,7 @@ int main()
 	char str[256];
 	
 	// Register signal and signal handler
-	signal(SIGINT, signalHandler);
+	//signal(SIGINT, signalHandler);
 	
 	do
 	{

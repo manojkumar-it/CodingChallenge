@@ -37,6 +37,13 @@ By arbitrary data, we mean that we don’t want to put any limitations or restri
 ||Segregating source code in to multiple headers and implementation files | Open
 ||Thread safe code in case of a multi-threaded application. Ex: Two threads trying to write to the same output file. | Open
 
+### Test Execution Details
+
+| OS | Windows 10 x64, Linux (Ubuntu)| verified |
+| Compiler | cl for Windows, gcc for Linux | verified |
+| Locales | English, Japanese | verified
+| Input File types | (.txt, .c, .html, .log, .jpg, .mp4, etc.) | verified |
+
 ### Reference Links
 [https://en.cppreference.com/w/]
 [https://docs.microsoft.com/en-us/cpp]
