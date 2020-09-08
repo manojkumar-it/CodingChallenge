@@ -50,14 +50,14 @@ int getTextFileEncoding(const char *pFileName)
 {
 	if(!pFileName)
 	{
-		printf("NULL pointer passed as paramter for file name\n");
+		printf("NULL pointer passed as paramter for file name");
 		exit(EXIT_FAILURE);
 	}
 	
 	FILE *pFile = fopen(pFileName, "rb");
 	if(!pFile)
 	{
-		printf("fopen failed\n");
+		perror("fopen failed");
 		exit(EXIT_FAILURE);
 	}
 		
@@ -103,7 +103,7 @@ int getTextFileEncoding(const char *pFileName)
 	
 	if(ferror(pFile))
 	{
-		printf("Read Failed\n");
+		perror("Read Failed");
 		FCLOSE(pFile);
 		exit(EXIT_FAILURE);
 	}
@@ -440,7 +440,6 @@ void writeData(FILE *pInputStream, FILE *pOutputStream, bool encodingConversionR
 				{
 					char16_t output[2 * HUNDRED_KILO_BYTE];
 					utf8_to_utf16(buffer, sizeof(buffer) / sizeof(buffer[0]), &output[0], sizeof(output) / sizeof(output[0]));
-					printf("strlen of utf16 str is : '%d'\n",strlen16(output));
 					size = fwrite(output, sizeof(output[0]), strlen16(output), pOutputStream);
 					break;
 				}
@@ -465,7 +464,7 @@ void writeData(FILE *pInputStream, FILE *pOutputStream, bool encodingConversionR
 		
 		if(ferror(pOutputStream))
 		{
-			printf("Write Failed\n");
+			perror("Write Failed");
 			
 			FCLOSE(pOutputStream);
 			FCLOSE(pInputStream);
@@ -476,7 +475,7 @@ void writeData(FILE *pInputStream, FILE *pOutputStream, bool encodingConversionR
 	
 	if(ferror(pInputStream))
 	{
-		printf("Read Failed\n");
+		perror("Read Failed");
 		fclose(pInputStream);
 		exit(EXIT_FAILURE);
 	}
@@ -511,7 +510,7 @@ int main()
 			pInputFileName = getInputFileName();
 			if(!pInputFileName)
 			{
-				printf("Error: Unable to get Input File Name.\n");
+				printf("Unable to get Input File Name");
 				//Free resources before exiting
 				exit(EXIT_FAILURE);
 			}
@@ -534,7 +533,7 @@ int main()
 	
 	if(!pInputStream)
 	{
-		printf("Error: Input File Stream pointer is NULL\n");
+		perror("Input File Stream pointer is NULL, fopen() failed");
 		//Add code to Free resources before exiting		
 		exit(EXIT_FAILURE);
 	}
@@ -543,7 +542,7 @@ int main()
 	//Handle Error
 	if(!pOutputFileName)
 	{
-		printf("Error: Unable to get Output File Name.\n");
+		perror("Unable to get Output File Name");
 		//Add code to free resources before exiting
 		exit(EXIT_FAILURE);
 	}
@@ -623,7 +622,7 @@ int main()
 	
 	if(!pOutputStream)
 	{
-		printf("Error: Output File Stream pointer is NULL\n");
+		perror("Output File Stream pointer is NULL, fopen() failed");
 		//Add code to Free resources before exiting
 		exit(EXIT_FAILURE);
 	}
