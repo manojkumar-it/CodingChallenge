@@ -51,14 +51,14 @@ int getTextFileEncoding(const char *pFileName)
 	if(!pFileName)
 	{
 		printf("NULL pointer passed as paramter for file name\n");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	
 	FILE *pFile = fopen(pFileName, "rb");
 	if(!pFile)
 	{
 		printf("fopen failed\n");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 		
 	unsigned char bom[4];
@@ -105,7 +105,7 @@ int getTextFileEncoding(const char *pFileName)
 	{
 		printf("Read Failed\n");
 		FCLOSE(pFile);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	
 	// We actually have no idea what the encoding is if we reach this point, so
@@ -113,6 +113,7 @@ int getTextFileEncoding(const char *pFileName)
 	return ASCII;
 }
 
+//Returns the string length of a UTF-16 string
 int strlen16(const char16_t* strarg)
 {
    if(!strarg)
@@ -468,7 +469,7 @@ void writeData(FILE *pInputStream, FILE *pOutputStream, bool encodingConversionR
 			FCLOSE(pOutputStream);
 			FCLOSE(pInputStream);
 			
-			exit(1);
+			exit(EXIT_FAILURE);
 		}
 	}
 	
@@ -476,7 +477,7 @@ void writeData(FILE *pInputStream, FILE *pOutputStream, bool encodingConversionR
 	{
 		printf("Read Failed\n");
 		fclose(pInputStream);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	
 	printf("Success! Write Data Completed.\n");
@@ -511,7 +512,7 @@ int main()
 			{
 				printf("Error: Unable to get Input File Name.\n");
 				//Free resources before exiting
-				exit(1);
+				exit(EXIT_FAILURE);
 			}
 			
 			pInputStream = fopen(pInputFileName, "rb");
@@ -534,7 +535,7 @@ int main()
 	{
 		printf("Error: Input File Stream pointer is NULL\n");
 		//Add code to Free resources before exiting		
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	
 	pOutputFileName	= getOutputFileName(pInputFileExt);
@@ -543,7 +544,7 @@ int main()
 	{
 		printf("Error: Unable to get Output File Name.\n");
 		//Add code to free resources before exiting
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	
 	bool outputFileExists = false;
@@ -551,11 +552,11 @@ int main()
 		outputFileExists = true;
 	
 	// Data read from stdin will always be UTF-8 encoded as this source code file is UTF-8 encoded.
-	// If output file is already present and has a different encoding format other than UTF-8, we need to convert the UTF-8 data in to output file's encodig format before writing the data to output file.     
 	int encodingFormat = DEFAULT;
 	bool encodingConversionRequired = false;
 	if( stdin == pInputStream)
 	{
+		// If output file is already present and has a different encoding format other than UTF-8, we need to convert the UTF-8 data in to output file's encodig format before writing the data to output file.     
 		if(outputFileExists)
 		{
 			encodingFormat = getTextFileEncoding(pOutputFileName);
@@ -589,7 +590,7 @@ int main()
 			{
 				// graceful exit as user opted it, so return success.
 				//Add code to free up resources before exiting
-				printf("Exiting...\n",c);
+				printf("Exiting...\n");
 				exit(EXIT_SUCCESS);	
 			}
 		}
@@ -597,7 +598,7 @@ int main()
 		{
 			pOutputStream = fopen(pOutputFileName,"wb");
 		}
-		printf("Enter the input data (press ctrl+z twice & press 'Enter' to process input): \n");
+		printf("Enter the input data (press ctrl+z twice & press 'Enter' to process input on Windows. on Linux press ctrl+D ): \n");
 	}
 	else
 	{
@@ -623,7 +624,7 @@ int main()
 	{
 		printf("Error: Output File Stream pointer is NULL\n");
 		//Add code to Free resources before exiting
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	
 	writeData(pInputStream, pOutputStream, encodingConversionRequired, encodingFormat);
@@ -636,5 +637,5 @@ int main()
 	
 	printf("Done\n");	
 	
-    return 0;
+    return EXIT_SUCCESS;
 }
