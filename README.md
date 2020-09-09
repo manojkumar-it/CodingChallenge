@@ -6,8 +6,8 @@ By arbitrary data, we mean that we don’t want to put any limitations or restri
 ### TEST CASES
 |TEST CASE CATEGORY | TEST CASE DESCRIPTION | STATUS |
 |------------------ | --------------------- | ------ |
-|| Provide a choice to the user for reading input data from 1. Console (Standard input) 2. Existing input File | Done
-|| Provide support for reading data from standard input | Done
+||Provide a choice to the user for reading input data from 1. Console (Standard input) 2. Existing input File | Done
+||Provide support for reading data from standard input | Done
 ||Provide support for reading data from an existing input file | Done
 ||Check whether the input file provided by user exists.| Done 
 ||If the input file does not exists, prompt the user to provide a valid file name. Repeat prompting for input file name, until a valid input file is provided. | Done
@@ -20,12 +20,13 @@ By arbitrary data, we mean that we don’t want to put any limitations or restri
 ||Support for appending to existing files having UTF-8 and UTF-16LE with BOM | Done
 ||Provide block-by-block reading and writing support for optimal performance. | Done
 ||Print a warning message in the console, when the extension of output file doesn't match the input file extension, but continue with the program execution. Example: When input file has '.JPEG' extension and output file extension is '.TXT', a warning will be printed, but the program will continue and the output file will be generated with the user specified extension.| Done
-|| NULL pointer checks | Done
-|| Read/Write failed | Done
-|| Unsupported encoding format for appending to output file	| Done
-||Free resources before exiting in case of failures	| Partially done
-||Processor & Endianness (Full support is only available for Little Endian machines) | Partially done
+||NULL pointer checks | Done
+||Read/Write failed | Done
+||Unsupported encoding format check and error message for appending to output file	| Done
+||Free resources before exiting in case of failures	| Done
+||Display appropriate and specific messsage for errors using perror() | Done
 ||OS (Windows, Linux, Solaris, etc.) - Supports any operating system as only standard "C" headers functions used for coding |Done
+||Processor & Endianness (Full support is only available for Little Endian machines) | Partially done
 ||provide support for file name with non-ASCII characters	| Open
 ||Support for appending to existing files having encoding formats other than UTF-8 BOM and UTF-16LE BOM	| Open
 ||Handle the scenario when both the input and output files are same. | Open
@@ -33,7 +34,6 @@ By arbitrary data, we mean that we don’t want to put any limitations or restri
 ||Handling interrupts/signals | Open
 ||Processor & Endianness dependency (Support Big Endian processor while reading/writing data) | Open
 ||Support for storing output files in user specified location (Currently, the output file is stored in the same path where the executable file is run)	| Open
-||Display appropriate/specific error message to the user when access to output file is denied because of read only permissions. Currently, a generic message "output file stream pointer is NULL." for any failure during fopen() call. | Open
 ||Segregating source code in to multiple headers and implementation files | Open
 ||Thread safe code in case of a multi-threaded application. Ex: Two threads trying to write to the same output file. | Open
 

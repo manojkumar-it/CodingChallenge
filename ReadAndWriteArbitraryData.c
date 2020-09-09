@@ -124,13 +124,6 @@ int strlen16(const char16_t* strarg)
    return str-strarg;
 }
 
-static inline size_t _strlen16(register const char16_t * string) {
-    if (!string) return 0;
-    register size_t len = 0;
-    while(string[len++]);
-    return len;
-}
-
 //Pointer arrays must always include the array size, because pointers do not know about the size of the supposed array size.
 void utf8_to_utf16(unsigned char* const utf8_str, int utf8_str_size, char16_t* utf16_str_output, int utf16_str_output_size) {
 	//First, grab the first byte of the UTF-8 string
@@ -451,7 +444,8 @@ void writeData(FILE *pInputStream, FILE *pOutputStream, bool encodingConversionR
 				default:
 				{
 					printf("Error: Output file has a encoding format which is currently not supported !\n");
-					// Add code to free up resources before exiting
+					FCLOSE(pOutputStream);
+					FCLOSE(pInputStream);
 					exit(EXIT_FAILURE);
 					break;
 				}
@@ -476,7 +470,8 @@ void writeData(FILE *pInputStream, FILE *pOutputStream, bool encodingConversionR
 	if(ferror(pInputStream))
 	{
 		perror("Read Failed");
-		fclose(pInputStream);
+		FCLOSE(pOutputStream);
+		FCLOSE(pInputStream);
 		exit(EXIT_FAILURE);
 	}
 	
@@ -511,13 +506,11 @@ int main()
 			if(!pInputFileName)
 			{
 				printf("Unable to get Input File Name");
-				//Free resources before exiting
 				exit(EXIT_FAILURE);
 			}
 			
 			pInputStream = fopen(pInputFileName, "rb");
-			//Handle Error
-
+			
 			break;
 		case '0':
 			pInputStream = stdin;
@@ -534,16 +527,14 @@ int main()
 	if(!pInputStream)
 	{
 		perror("Input File Stream pointer is NULL, fopen() failed");
-		//Add code to Free resources before exiting		
 		exit(EXIT_FAILURE);
 	}
 	
 	pOutputFileName	= getOutputFileName(pInputFileExt);
-	//Handle Error
 	if(!pOutputFileName)
 	{
-		perror("Unable to get Output File Name");
-		//Add code to free resources before exiting
+		printf("Unable to get Output File Name\n");
+		FCLOSE(pInputStream);
 		exit(EXIT_FAILURE);
 	}
 	
@@ -579,7 +570,8 @@ int main()
 					{
 						printf("Currently, files having UTF-16LE and UTF-8 encoding with BOM are only supported for appending.\n");
 						printf("Exiting...\n");
-						//Free up resources before exiting
+						FREE(pOutputFileName);
+						FCLOSE(pInputStream);
 						exit(EXIT_FAILURE);
 					}
 				}
@@ -588,9 +580,10 @@ int main()
 			}
 			else
 			{
-				// graceful exit as user opted it, so return success.
-				//Add code to free up resources before exiting
+				FREE(pOutputFileName);
+				FCLOSE(pInputStream);
 				printf("Exiting...\n");
+				// graceful exit as user opted it, so return success.
 				exit(EXIT_SUCCESS);	
 			}
 		}
@@ -609,21 +602,22 @@ int main()
 			
 			if( (c != 'Y') && (c != 'y') )
 			{
-				// graceful exit as user opted it, so return success.
-
-				//Add code to free up resources before exiting
 				printf("Char: '%c' 	Exiting...\n",c);
+				
+				FCLOSE(pInputStream);
+				FREE(pInputFileName);
+				FREE(pOutputFileName);
+				// graceful exit as user opted it, so return success.
 				exit(EXIT_SUCCESS);
 			}
 		}
 		pOutputStream = fopen(pOutputFileName,"wb");
-		//writeData(pInputStream, pOutputStream, encodingConversionRequired, DEFAULT);
 	}
 	
 	if(!pOutputStream)
 	{
 		perror("Output File Stream pointer is NULL, fopen() failed");
-		//Add code to Free resources before exiting
+		FCLOSE(pInputStream);
 		exit(EXIT_FAILURE);
 	}
 	
